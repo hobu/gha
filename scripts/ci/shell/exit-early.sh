@@ -1,6 +1,6 @@
 #!/bin/bash
 
-
+ls non-existant
 if [ -z "$ANACONDA_TOKEN" ]
 then
     echo "Exiting early"
