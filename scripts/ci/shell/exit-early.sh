@@ -8,18 +8,14 @@ then
     exit 0;
 fi
 
-CI_PLAT=""
-if [ "$PLATFORM" == "windows-latest" ]; then
-    CI_PLAT="win"
+echo "ANACONDA_TOKEN check command status $?"
+
+if [ -z "${ANACONDA_TOKEN}" ]
+then
+    echo "ANACONDA_TOKEN was set to empty"
+    echo "Last command status $?"
+    echo "Exiting early"
+    exit 0;
 fi
 
-if [ "$PLATFORM" == "ubuntu-latest" ]; then
-    CI_PLAT="linux"
-fi
-
-if [ "$PLATFORM" == "macos-latest" ]; then
-    CI_PLAT="osx"
-fi
-
-ls
 echo "Printing some other stuff"
