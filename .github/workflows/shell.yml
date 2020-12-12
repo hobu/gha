@@ -19,7 +19,7 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Attempt to exit early
-      shell: bash
+      shell: bash -l {0}
       run: |
           source ./scripts/ci/shell/exit-early.sh
 
