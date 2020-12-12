@@ -1,6 +1,7 @@
 #!/bin/bash
 
-if [ -z "$ANACONDA_TOKEN" ]
+export ANACONDA_TOKEN=""
+if [ -z "${ANACONDA_TOKEN+x}" ]
 then
     echo "Last command status $?"
     echo "Exiting early"
