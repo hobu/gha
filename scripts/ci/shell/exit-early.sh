@@ -2,6 +2,7 @@
 
 if [ -z "$ANACONDA_TOKEN" ]
 then
+    echo "Last command status $?"
     echo "Exiting early"
     exit 0;
 fi
