@@ -1,0 +1,26 @@
+name: Shell
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    name: Shell ${{ matrix.platform }}
+
+    runs-on: ${{ matrix.platform }}
+    strategy:
+      fail-fast: true
+      matrix:
+        platform: ['ubuntu-latest']
+
+    env:
+      PLATFORM: ${{ matrix.platform }}
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Attempt to exit early
+      shell: bash -l {0}
+      run: |
+          source ./scripts/ci/shell/exit-early.sh
+
+
