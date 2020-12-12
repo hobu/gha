@@ -18,9 +18,14 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    - name: Make directory
+      shell: bash -l {0}
+      run: |
+          mkdir working
     - name: Attempt to exit early
       shell: bash -l {0}
       run: |
-          source ./scripts/ci/shell/exit-early.sh
+          source ../scripts/ci/shell/exit-early.sh
+      working-directory: ./working
 
 
