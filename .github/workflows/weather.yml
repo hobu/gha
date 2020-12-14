@@ -18,18 +18,26 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - uses: conda-incubator/setup-miniconda@v2 # conda has our awscli
+    - uses: actions/setup-python@v2
       with:
-        channels: conda-forge
-        auto-update-conda: true
+        python-version: '3.8'
 
     - name: Install AWS CLI
       shell: bash -l {0}
       run: |
-          conda install awscli curl -y
+          pip install awscli curl -y
 
     - name: Fetch the weather for ${{ github.event.inputs.stationId }}
       shell: bash -l {0}
       run: |
-          curl wttr.in/${{ github.event.inputs.stationId }}
+          curl -s wttr.in/${{ github.event.inputs.stationId }} --output weather
 
+    - name: Upload the weather to S3
+      shell: bash -l {0}
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+      run: |
+          aws s3 cp weather s3://gha-testing/ --acl public-read
+          echo "Weather for ${{ github.event.inputs.stationId }} available at https://gha-testing.s3.amazonaws.com/weather"
