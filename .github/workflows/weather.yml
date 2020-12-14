@@ -5,14 +5,14 @@ on:
   pull_request:
   workflow_dispatch:
     inputs:
-      stationId:
+      STATIONID:
         description: "Where are we checking the weather"
         required: false
         default: KIOW
 
 
 env:
-  STATIONID: ${{ github.event.inputs.stationId || KIOW }}
+  STATIONID: ${{ github.event.inputs.STATIONID }}
 
 jobs:
   build:
