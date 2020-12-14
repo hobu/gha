@@ -25,7 +25,7 @@ jobs:
     - name: Install AWS CLI
       shell: bash -l {0}
       run: |
-          pip install awscli curl -y
+          pip install awscli curl
 
     - name: Fetch the weather for ${{ github.event.inputs.stationId }}
       shell: bash -l {0}
