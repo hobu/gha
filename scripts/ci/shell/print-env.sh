@@ -3,7 +3,7 @@
 kn="$1"
 echo "printing status of $kn"
 
-if [ -z "${kn}+x" ]
+if [ -z "${!kn}+x" ]
 then
     echo "${kn} was not available in the environment"
     echo "Exiting early"
@@ -11,7 +11,7 @@ then
 fi
 
 
-if [ -z "${kn}" ]
+if [ -z "${!kn}" ]
 then
     echo "${kn} was set to empty"
     echo "Exiting early"
