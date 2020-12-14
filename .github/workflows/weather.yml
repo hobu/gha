@@ -12,7 +12,7 @@ on:
 
 
 env:
-  STATIONID: ${{ github.event.inputs.STATIONID }}
+  STATIONID: ${{ github.event.inputs.STATIONID.default }}
 
 jobs:
   build:
