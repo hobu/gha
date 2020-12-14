@@ -10,6 +10,10 @@ on:
         required: false
         default: "KIOW"
 
+
+env:
+  STATIONID: ${{ github.event.inputs.stationId || "KIOW" }}
+
 jobs:
   build:
     name: Linux ${{ matrix.type }}
@@ -27,10 +31,10 @@ jobs:
       run: |
           pip install awscli curl
 
-    - name: Fetch the weather for ${{ github.event.inputs.stationId }}
+    - name: Fetch the weather for ${{ env.STATIONID }}
       shell: bash -l {0}
       run: |
-          curl -s wttr.in/${{ github.event.inputs.stationId }} --output weather
+          curl -s wttr.in/${{ env.STATIONID }} --output weather
 
     - name: Upload the weather to S3
       shell: bash -l {0}
@@ -39,5 +43,5 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
       run: |
-          aws s3 cp --content-type "text/plain; charset=utf-8" weather s3://gha-testing/weather-${{ github.event.inputs.stationId }} --acl public-read
-          echo "Weather for ${{ github.event.inputs.stationId }} available at https://gha-testing.s3.amazonaws.com/weather-${{ github.event.inputs.stationId }}"
+          aws s3 cp --content-type "text/plain; charset=utf-8" weather s3://gha-testing/weather-${{ env.STATIONID }} --acl public-read
+          echo "Weather for ${{ env.STATIONID }} available at https://gha-testing.s3.amazonaws.com/weather-${{ env.STATIONID}}"
