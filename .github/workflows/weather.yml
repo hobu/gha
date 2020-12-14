@@ -1,4 +1,4 @@
-name: "Check the weather for ${{ github.event.inputs.stationId }}"
+name: "Check the weather "
 
 on:
   push:
