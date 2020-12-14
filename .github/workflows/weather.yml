@@ -8,11 +8,11 @@ on:
       stationId:
         description: "Where are we checking the weather"
         required: false
-        default: "KIOW"
+        default: KIOW
 
 
 env:
-  STATIONID: ${{ github.event.inputs.stationId || "KIOW" }}
+  STATIONID: ${{ github.event.inputs.stationId || KIOW }}
 
 jobs:
   build:
