@@ -1,0 +1,35 @@
+name: Check the weather
+
+on:
+  push:
+  pull_request:
+  repository_dispatch:
+      inputs:
+        stationId:
+          description: "Where are we checking the weather"
+          required: false
+          default: "KIOW"
+
+jobs:
+  build:
+    name: Linux ${{ matrix.type }}
+
+    runs-on: 'ubuntu-latest'
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: conda-incubator/setup-miniconda@v2 # conda has our awscli
+      with:
+        channels: conda-forge
+        auto-update-conda: true
+
+    - name: Install AWS CLI
+      shell: bash -l {0}
+      run: |
+          conda install awscli curl -y
+
+    - name: Fetch the weather for ${{ github.event.inputs.stationId }}
+      shell: bash -l {0}
+      run: |
+          curl wttr.in/${{ github.event.inputs.stationId }}
+
