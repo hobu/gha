@@ -1,19 +1,21 @@
 #!/bin/bash
 
-keyname="${!1}"
-if [ -z "${keyame+x}" ]
+kn="$1"
+echo "printing status of $kn"
+
+if [ -z "${kn}+x" ]
 then
-    echo "${keyame} was not available in the environment"
+    echo "${kn} was not available in the environment"
     echo "Exiting early"
     exit 0;
 fi
 
 
-if [ -z "${keyname}" ]
+if [ -z "${kn}" ]
 then
-    echo "${keyname} was set to empty"
+    echo "${kn} was set to empty"
     echo "Exiting early"
     exit 0;
 fi
 
-echo "${keyname} is set and available!"
+echo "The value of ${kn} is ${!kn}"
