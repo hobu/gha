@@ -22,10 +22,19 @@ jobs:
       shell: bash -l {0}
       run: |
           mkdir working
-    - name: Attempt to exit early
+
+    - name: AWS_ACCESS_KEY_ID secret is in environment
       shell: bash -l {0}
       run: |
-          source ../scripts/ci/shell/exit-early.sh
+          source ../scripts/ci/shell/print-env.sh "AWS_ACCESS_KEY_ID"
+      working-directory: ./working
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+
+    - name: AWS_ACCESS_KEY_ID secret is not set
+      shell: bash -l {0}
+      run: |
+          source ../scripts/ci/shell/print-env.sh "AWS_ACCESS_KEY_ID"
       working-directory: ./working
 
 
