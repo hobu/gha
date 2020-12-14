@@ -1,21 +1,18 @@
 #!/bin/bash
 
-export ANACONDA_TOKEN=""
-if [ -z "${ANACONDA_TOKEN+x}" ]
+if [ -z "${AWS_ACCESS_KEY_ID+x}" ]
 then
-    echo "Last command status $?"
+    echo "AWS_ACCESS_KEY_ID was not available in the environment"
     echo "Exiting early"
     exit 0;
 fi
 
-echo "ANACONDA_TOKEN check command status $?"
 
-if [ -z "${ANACONDA_TOKEN}" ]
+if [ -z "${AWS_ACCESS_KEY_ID}" ]
 then
-    echo "ANACONDA_TOKEN was set to empty"
-    echo "Last command status $?"
+    echo "AWS_ACCESS_KEY_ID was set to empty"
     echo "Exiting early"
     exit 0;
 fi
 
-echo "Printing some other stuff"
+echo "AWS_ACCESS_KEY_ID is set and available!"
