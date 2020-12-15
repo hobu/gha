@@ -12,7 +12,7 @@ on:
 
 
 env:
-  STATIONID: ${{ github.event.inputs.STATIONID.default }}
+  STATIONID: "KIOW"
 
 jobs:
   build:
@@ -43,5 +43,5 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
       run: |
-          aws s3 cp --content-type "text/plain; charset=utf-8" weather s3://gha-testing/weather-${{ env.STATIONID }} --acl public-read
-          echo "Weather for ${{ env.STATIONID }} available at https://gha-testing.s3.amazonaws.com/weather-${{ env.STATIONID}}"
+          aws s3 cp --content-type "text/plain; charset=utf-8" weather s3://gha-testing/weather-${{ github.event.inputs.STATIONID || env.STATIONID }} --acl public-read
+          echo "Weather for ${{ github.event.inputs.STATIONID || env.STATIONID }} available at https://gha-testing.s3.amazonaws.com/weather-${{ github.event.inputs.STATIONID || env.STATIONID}}"
