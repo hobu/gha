@@ -2,6 +2,8 @@ FROM continuumio/miniconda3 as builder
 MAINTAINER Howard Butler <howard@hobu.co>
 
 
+SHELL ["/bin/bash", "--login", "-c"]
+
 RUN . /opt/conda/etc/profile.d/conda.sh \
     conda update -n base -c defaults conda -y \
     && conda create -n pdal -y python=3.8 \
