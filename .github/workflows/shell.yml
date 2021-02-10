@@ -37,4 +37,9 @@ jobs:
           source ../scripts/ci/shell/print-env.sh "AWS_ACCESS_KEY_ID"
       working-directory: ./working
 
+    - name: 'TCMUG secret '
+      shell: bash -l {0}
+      run: |
+          source ../scripts/ci/shell/print-env.sh "TCMUG"
+      working-directory: ./working
 
